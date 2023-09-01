@@ -1,21 +1,18 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NetflixLogo from "../public/Netflix_Logo_PMS.png";
 import Header from "./Header";
 import { BG_URL } from "../Utils/Util";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
-import { useNavigate } from "react-router-dom";
 import { validateData } from "../Utils/HelperFunction";
 import { addUser } from "../Store/Reducers/userReducer";
 
 export default function Login() {
   const data = useSelector((store) => store.user);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isSignInPage, setIsSignInPage] = useState(true);
@@ -48,11 +45,22 @@ export default function Login() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigate("/browse");
-        dispatch(addUser(user));
+        updateProfile(auth.currentUser, {
+          displayName: username.current.value,
+          photoURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A7zpLc39btkk7GOY15NpYJvf8ib_BFztqQ&usqp=CAU",
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+            dispatch(addUser(user));
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
 
         setErrorMsg(errorMessage);
@@ -64,18 +72,16 @@ export default function Login() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigate("/browse");
         dispatch(addUser(user));
 
         // ...
       })
       .catch((error) => {
         const errorMessage = error.message;
-
-        console.log("errorMessage", errorMessage);
         setErrorMsg(errorMessage);
       });
   };
+
   return (
     <div className="text-3xl font-bold underline w-screen h-screen">
       <Header />
