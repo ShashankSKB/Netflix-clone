@@ -2,6 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Browse from "./Browse";
 import Login from "./Login";
 import { RouterProvider } from "react-router-dom";
+import Search from "./Search";
+import { useEffect, useState } from "react";
+import { getURLQuery } from "../Utils/HelperFunction";
 
 const Body = () => {
   const appRouter = createBrowserRouter([

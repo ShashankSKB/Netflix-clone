@@ -13,7 +13,13 @@ export const useNowPlaying = () => {
       .then((response) => response.json())
       .then((response) => {
         dispatch(addNowPlayingMovies(response.results));
-        dispatch(addTrailerVideo(response.results[0]));
+
+        const randomIndex = Math.floor(Math.random() * response.results);
+        dispatch(
+          addTrailerVideo(
+            response.results[Math.floor(Math.random() * randomIndex)]
+          )
+        );
       })
       .catch((err) => console.error(err));
   };

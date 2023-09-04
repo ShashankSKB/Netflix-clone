@@ -3,13 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import NetflixLogo from "../public/Netflix_Logo_PMS.png";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
-import { addUser, removeUser } from "../Store/Reducers/userReducer";
+import { addUser, removeUser, setBrowser } from "../Store/Reducers/userReducer";
 import { useNavigate } from "react-router-dom";
+import { getURLQuery } from "../Utils/HelperFunction";
 
 export default function Header() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const UrlQuery = getURLQuery();
+  const search = UrlQuery.get("search");
+  console.log("search", search);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -23,6 +28,7 @@ export default function Header() {
             photoURL: photoURL,
           })
         );
+
         navigate("/browse");
       } else {
         // User is signed out
@@ -45,14 +51,24 @@ export default function Header() {
       <div className="w-screen absolute bg-gradient-to-b from-slate-800 p-2 z-10 flex justify-between">
         <div className="w-40">
           {" "}
-          <img src={NetflixLogo} onClick={() => navigate("/browse")} />
+          <img src={NetflixLogo} onClick={() => dispatch(setBrowser(true))} />
         </div>
 
-        <div className="w-20 object-cover text-white">
+        <div className="w-18 object-cover text-white">
           <img src={user?.photoURL} />
-          <button className="text-sm" onClick={handleSignOut}>
-            Sign Out
-          </button>
+          <div className="flex flex-row gap-2 m-3">
+            <button
+              className="text-sm text-stone-400 mr-2"
+              onClick={() => {
+                dispatch(setBrowser(false));
+              }}
+            >
+              Search
+            </button>
+            <button className="text-sm" onClick={handleSignOut}>
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -4,7 +4,9 @@ import MovieDescription from "./MovieDescription";
 import { useSelector } from "react-redux";
 
 export default function MainContainer() {
-  const data = useSelector((store) => store.movies.nowPlaying);
+  const { data } = useSelector(({ movies }) => ({
+    data: movies.nowPlaying,
+  }));
 
   return (
     <>
