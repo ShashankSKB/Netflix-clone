@@ -8,23 +8,17 @@ import { useMovieTrailer } from "../Hooks/useMovieTrailer";
 export default function MovieOverview({ title, posterPath }) {
   const {
     genres,
-    original_title,
-    poster_path,
+
     vote_average,
     overview,
-    budget,
-    adult,
+
     runtime,
-    vote_count,
     tagline,
     release_date,
     id,
   } = useSelector((store) => store.movies.movieOverView);
 
   const results = convertMinutesToHoursAndMinutes(runtime);
-  const percentage = (vote_average / 10) * 100;
-
-  console.log("percentage", percentage);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,14 +30,14 @@ export default function MovieOverview({ title, posterPath }) {
     trailerVideos && trailerVideos?.results && trailerVideos?.results[0]?.key;
 
   return (
-    <div className="text-white w-[50vw]">
-      <p className="mb-4">Overview</p>
+    <div className="text-white w-[80vw] sm:w-[50vw]">
+      <p className="mb-4">Preview</p>
 
-      <div className="flex flex">
-        <div className="w-[320px]  md:w-48 pr-4 ">
+      <div className="flex flex-col sm:flex-row gap-1">
+        <div className=" aspect-auto md:w-48 pr-4 ">
           <img alt="Movie Card" src={IMG_CDN_URL + posterPath} />
         </div>
-        <div>
+        <div className="flex flex-col gap-1">
           <div className="text-sm text-slate-400">
             <p className="text-3xl font-medium text-white">{title}</p>
             <span className=" text-sm">
@@ -58,11 +52,11 @@ export default function MovieOverview({ title, posterPath }) {
             <p>Rating : {vote_average.toFixed(2)}</p>
           </div>
 
-          <div className="text-sm text-slate-200 text-amber-500 italic">
+          <div className="text-sm  text-amber-500 italic">
             <p>{tagline}</p>
           </div>
-          <p>Overview</p>
-          <p className="text-sm">{overview}</p>
+          <p className="text-lg underline">Overview</p>
+          <p className="text-sm ">{overview}</p>
           <button
             className="p-2 px-3 m-1 text-black bg-white rounded-lg"
             onClick={() => setIsOpen(true)}
@@ -74,7 +68,7 @@ export default function MovieOverview({ title, posterPath }) {
             setIsOpen={setIsOpen}
             children={
               <iframe
-                className="w-[70vw] aspect-video"
+                className="w-[80vw] h-[70vh] sm:w-[70vw] sm:aspect-video sm:h-[90vh]"
                 src={
                   "https://www.youtube.com/embed/" +
                   trailerSrc +
@@ -82,6 +76,7 @@ export default function MovieOverview({ title, posterPath }) {
                 }
                 title="YouTube video player"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; full-screen"
+                allowFullScreen
               ></iframe>
             }
           ></Modal>

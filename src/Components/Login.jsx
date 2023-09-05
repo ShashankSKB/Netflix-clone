@@ -86,7 +86,7 @@ export default function Login() {
     <div className="text-3xl font-bold underline w-screen h-screen">
       <Header />
       <div className="absolute top-0 right-0 w-screen h-screen">
-        <img src={BG_URL} />
+        <img src={BG_URL} className="h-screen object-cover w-screen" />
       </div>
       <div>
         <form

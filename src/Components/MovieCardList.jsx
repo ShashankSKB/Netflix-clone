@@ -2,7 +2,6 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 export default function MovieCardList({ data, title }) {
-  console.log("data", data);
   return (
     <>
       {data && data?.length > 0 && (

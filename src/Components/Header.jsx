@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { getURLQuery } from "../Utils/HelperFunction";
 
 export default function Header() {
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const UrlQuery = getURLQuery();
   const search = UrlQuery.get("search");
-  console.log("search", search);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -50,8 +49,8 @@ export default function Header() {
 
   return (
     <div className="text-3xl font-bold underline">
-      <div className="w-screen absolute bg-gradient-to-b from-slate-800 p-2 z-10 flex justify-between">
-        <div className="w-40">
+      <div className="  sm:absolute bg-gradient-to-b from-slate-800 w-screen absolute p-2 z-10 flex justify-between sm:w-screen absolute bg-gradient-to-b from-slate-800 p-2 z-10 flex justify-between">
+        <div className="w-20 sm:w-40">
           {" "}
           <img
             src={NetflixLogo}
@@ -61,22 +60,24 @@ export default function Header() {
         </div>
 
         <div className="w-18 object-cover text-white">
-          <div className="flex flex-row gap-2 m-3">
-            <button
-              className="text-sm text-stone-400 mr-2"
-              onClick={() => {
-                dispatch(setBrowser(false));
-              }}
-            >
-              Search
-            </button>
-            <button className="text-sm" onClick={handleSignOut}>
-              Sign Out
-            </button>
-            {/* <div className="w-10">
+          {user && (
+            <div className="flex flex-row gap-2 m-3">
+              <button
+                className="text-sm text-stone-400 mr-2"
+                onClick={() => {
+                  dispatch(setBrowser(false));
+                }}
+              >
+                Search
+              </button>
+              <button className="text-sm" onClick={handleSignOut}>
+                Sign Out
+              </button>
+              {/* <div className="w-10">
               {user.user && <img src={user?.user?.photoURL} alt="user dp" />}
             </div> */}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

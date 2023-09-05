@@ -13,12 +13,15 @@ export default function VideoContainer({ movieId }) {
   return (
     <div>
       <iframe
-        className="w-screen aspect-video"
+        className="w-screen  aspect-video  sm:w-screen aspect-video "
         src={
-          "https://www.youtube.com/embed/" + trailerSrc + "?&autoplay=1&mute=1"
+          "https://www.youtube.com/embed/" +
+          trailerSrc +
+          "?&autoplay=1&mute=1&controls=0"
         }
         title="YouTube video player"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"
+        allowFullScreen
       ></iframe>
     </div>
   );

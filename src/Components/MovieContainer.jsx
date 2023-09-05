@@ -10,7 +10,7 @@ export default function MovieContainer() {
   return (
     nowPlayingData && (
       <div className="bg-black">
-        <div className="relative -mt-60 ">
+        <div className="relative  sm:relative sm:-mt-56 ">
           <MovieCardList title="Now Playing" data={nowPlayingData} />
           <MovieCardList title="Top Rated" data={topRated} />
           <MovieCardList title="Popular" data={popular} />
