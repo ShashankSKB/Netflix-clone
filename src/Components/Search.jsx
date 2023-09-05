@@ -24,8 +24,6 @@ export default function Search() {
     (store) => store.movies.searchMovieData.results
   );
 
-  console.log(searchData);
-
   return (
     <div>
       <div className="absolute mt-[50vh] w-full">
