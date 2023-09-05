@@ -14,12 +14,12 @@ export const useNowPlaying = () => {
       .then((response) => {
         dispatch(addNowPlayingMovies(response.results));
 
-        const randomIndex = Math.floor(Math.random() * response.results);
-        dispatch(
-          addTrailerVideo(
-            response.results[Math.floor(Math.random() * randomIndex)]
-          )
-        );
+        // const randomIndex = Math.floor(Math.random() * response.results);
+        // dispatch(
+        //   addTrailerVideo(
+        //     response.results[Math.floor(Math.random() * randomIndex)]
+        //   )
+        // );
       })
       .catch((err) => console.error(err));
   };

@@ -9,6 +9,7 @@ const initialState = {
   watchProviders: {},
   movieOverView: {},
   searchMovieData: {},
+  trailerVideoHome: {},
 };
 
 const movieSlice = createSlice({
@@ -39,6 +40,9 @@ const movieSlice = createSlice({
     addSearchedMovieData: (state, action) => {
       state.searchMovieData = action.payload;
     },
+    addTrailerVideoHome: (state, action) => {
+      state.trailerVideoHome = action.payload;
+    },
   },
 });
 
@@ -51,6 +55,7 @@ export const {
   addWatchProvides,
   addMovieOverView,
   addSearchedMovieData,
+  addTrailerVideoHome,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

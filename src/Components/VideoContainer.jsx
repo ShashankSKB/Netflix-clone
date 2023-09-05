@@ -3,9 +3,9 @@ import { useMovieTrailer } from "../Hooks/useMovieTrailer";
 import { useSelector } from "react-redux";
 
 export default function VideoContainer({ movieId }) {
-  useMovieTrailer(movieId);
+  useMovieTrailer(movieId, true);
 
-  const trailerVideos = useSelector((store) => store.movies.trailerVideo);
+  const trailerVideos = useSelector((store) => store.movies.trailerVideoHome);
 
   const trailerSrc =
     trailerVideos && trailerVideos?.results && trailerVideos?.results[0]?.key;

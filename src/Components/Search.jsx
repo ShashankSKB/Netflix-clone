@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Header from "./Header";
+import React, { useState } from "react";
 import { OPTIONS, SEARCH_MOVIE } from "../Utils/Contants";
 import { addSearchedMovieData } from "../Store/Reducers/movieReducer";
 import { useDispatch, useSelector } from "react-redux";

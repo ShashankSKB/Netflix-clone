@@ -40,7 +40,9 @@ export default function Header() {
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+        dispatch(setBrowser(true));
+      })
       .catch((error) => {
         navigate("/error");
       });
@@ -51,11 +53,14 @@ export default function Header() {
       <div className="w-screen absolute bg-gradient-to-b from-slate-800 p-2 z-10 flex justify-between">
         <div className="w-40">
           {" "}
-          <img src={NetflixLogo} onClick={() => dispatch(setBrowser(true))} />
+          <img
+            src={NetflixLogo}
+            onClick={() => dispatch(setBrowser(true))}
+            alt="netflix logo"
+          />
         </div>
 
         <div className="w-18 object-cover text-white">
-          <img src={user?.photoURL} />
           <div className="flex flex-row gap-2 m-3">
             <button
               className="text-sm text-stone-400 mr-2"
@@ -68,6 +73,9 @@ export default function Header() {
             <button className="text-sm" onClick={handleSignOut}>
               Sign Out
             </button>
+            {/* <div className="w-10">
+              {user.user && <img src={user?.user?.photoURL} alt="user dp" />}
+            </div> */}
           </div>
         </div>
       </div>
